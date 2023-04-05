@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "crypton_backend": {
+      "main": "src/crypton_backend/main.mo",
+      "type": "motoko"
+    },
+    "crypton_frontend": {
+      "dependencies": [
+        "crypton_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/crypton_frontend/src/index.html"
+      },
+      "source": [
+        "src/crypton_frontend/assets",
+        "dist/crypton_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
