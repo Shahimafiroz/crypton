@@ -19,10 +19,10 @@ actor class NFT (name: Text, owner: Principal, content: [Nat8]) {
 
     public query func getImage() : async [Nat8]{
         return imageBytes;
-    }
+    };
 
 
 
 
-  Debug.print("It works!");
+  
 }

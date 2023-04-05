@@ -3,11 +3,15 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import homeImage from "../../assets/home-img.png";
+import Item from "./Item";
+import Minter from "./Minter";
 
 function App() {
+  const NFTID = "s55qq-oqaaa-aaaaa-aaakq-cai";
   return (
     <div className="App">
       <Header />
+      <Minter />
       <div className="shahima">
         <div className="khushi">
           <p className="discover">Discover</p>
@@ -22,7 +26,8 @@ function App() {
           </p>
         </div>
         <div className="nairy">
-          <img className="bottom-space" src={homeImage} />{" "}
+          {/* <Item id={NFTID} /> */}
+          {/* <img className="bottom-space" src={homeImage} />{" "} */}
         </div>
       </div>
       {/* <img className="bottom-space" src={homeImage} /> */}
