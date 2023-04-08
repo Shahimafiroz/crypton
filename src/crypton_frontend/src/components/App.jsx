@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Minter />
+
       <div className="shahima">
         <div className="khushi">
           <p className="discover">Discover</p>
@@ -26,11 +26,12 @@ function App() {
           </p>
         </div>
         <div className="nairy">
+          <Minter />
           {/* <Item id={NFTID} /> */}
           {/* <img className="bottom-space" src={homeImage} />{" "} */}
+          {/* <img className="bottom-space" src={homeImage} /> */}
         </div>
       </div>
-      {/* <img className="bottom-space" src={homeImage} /> */}
       <Footer />
     </div>
   );

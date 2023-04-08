@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { crypton_backend } from "../../../declarations/crypton_backend/index";
+import { Principal } from "@dfinity/principal";
 
 function Minter() {
   const { register, handleSubmit } = useForm();
@@ -7,7 +9,11 @@ function Minter() {
   async function onSubmit(data) {
     const name = data.name;
     const image = data.image[0];
-    const imageByteData = [...new Uint8Array(await image.arrayBuffer())];
+    const imageArray = await image.arrayBuffer();
+    const imageByteData = [...new Uint8Array(imageArray)];
+
+    const newNFTID = await crypton_backend.mint(imageByteData, name);
+    console.log(newNFTID.toText());
   }
 
   return (
