@@ -33,7 +33,7 @@ function Item(props) {
     setOwner(owner.toText());
     setImage(image);
   }
-
+  // we only want to call the "loadNft" methood once and thats the 1st time this item component gets rendered hence we use useffect
   useEffect(() => {
     loadNft();
   }, []);

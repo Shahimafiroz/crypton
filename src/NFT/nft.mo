@@ -24,10 +24,15 @@ actor class NFT (name: Text, owner: Principal, content: [Nat8]) = this {
 
     public query func getCanisterId() : async Principal{
       return  Principal.fromActor(this);
-    }
+    };
 
 
 
 
   
 }
+
+// actor NFT {
+
+//   Debug.print("IT  WORKS")
+// }
