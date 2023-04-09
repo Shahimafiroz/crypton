@@ -5,7 +5,7 @@ import { idlFactory } from "../../../../.dfx/local/canisters/nft";
 import { Principal } from "@dfinity/principal";
 
 function Item(props) {
-  const id = Principal.fromText(props.id);
+  const id = props.id;
 
   // creating constant with state
   const [name, setName] = useState("");

@@ -53,12 +53,17 @@ import Prelude "mo:base/Prelude";
                 ownedNfts := List.push(nftId , ownedNfts);
                 mapOfOwners.put(owner , ownedNfts);
 
-              }
+              };
 
+/// 4 .... methood to fetch the list of IDs and turn it into an array that can be used on the frontend.
 
+            public query func getOwnedNFTs(user: Principal) : async [Principal]{
 
-
-
-
+                var userNfts : List.List<Principal> = switch(mapOfOwners.get(user)){
+                        case null List.nil<Principal>();
+                        case(?result) result; 
+                };
+                return List.toArray(userNfts);
+            }
 
  }

@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import homeImage from "../../assets/home-img.png";
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 import Minter from "./Minter";
 import Gallery from "./Gallery";
+import { crypton_backend } from "../../../declarations/crypton_backend/index";
+import CURRENT_USER_ID from "../index";
 
 function Header() {
+  const [userOwnedGallery, setOwnedGallery] = useState();
+
+  async function getNFTs() {
+    const userNFTSIds = await crypton_backend.getOwnedNFTs(CURRENT_USER_ID);
+    console.log(userNFTSIds);
+    setOwnedGallery(<Gallery title="My NFT's" ids={userNFTSIds} />);
+  }
+
+  useEffect(() => {
+    getNFTs();
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="app-root-1">
@@ -44,9 +58,7 @@ function Header() {
           <Minter />
         </Route>
         {/*  */}
-        <Route path="/collection">
-          <Gallery title="My NFT's" />
-        </Route>
+        <Route path="/collection">{setOwnedGallery}</Route>
         {/*  */}
         <Route path="/">
           <div className="shahima">
