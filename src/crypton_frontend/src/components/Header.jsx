@@ -50,17 +50,19 @@ function Header() {
       </div>
       <Switch>
         {/*  */}
-        <Route path="/discover">
+        <Route exact path="/discover">
           <h1>DISCOVER</h1>
         </Route>
         {/*  */}
-        <Route path="/minter">
+        <Route exact path="/minter">
           <Minter />
         </Route>
         {/*  */}
-        <Route path="/collection">{setOwnedGallery}</Route>
+        <Route exact path="/collection">
+          {userOwnedGallery}
+        </Route>
         {/*  */}
-        <Route path="/">
+        <Route exact path="/">
           <div className="shahima">
             <div className="khushi">
               <p className="discover">Discover</p>

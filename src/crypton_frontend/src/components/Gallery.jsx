@@ -10,7 +10,6 @@ function Gallery(props) {
       setItems(
         props.ids.map((NFTId) => <Item id={NFTId} key={NFTId.toText()} />)
       );
-    } else {
     }
   }
   //////////
