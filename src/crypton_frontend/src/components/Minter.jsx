@@ -20,6 +20,9 @@ function Minter() {
     console.log(newNFTID.toText());
     setNFTPrincipal(newNFTID);
     setLoaderHidden(true);
+    // console.log("jjwbdchubdjuch");
+    // console.log(data.name);
+    // console.log(data.image);
   }
 
   if (nftPrincipal == "") {

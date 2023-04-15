@@ -48,6 +48,7 @@ function Header() {
           </div>
         </header>
       </div>
+      {/* ///////////////////////////////////////////////////// Handling routes using router ////////////////////////////////////////////// */}
       <Switch>
         {/*  */}
         <Route exact path="/discover">

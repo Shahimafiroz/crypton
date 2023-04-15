@@ -26,9 +26,7 @@ actor class NFT (name: Text, owner: Principal, content: [Nat8]) = this {
       return  Principal.fromActor(this);
     };
 
-
-
-
+    Debug.print("It works");
   
 }
 

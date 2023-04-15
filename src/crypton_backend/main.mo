@@ -8,14 +8,10 @@ import HashMap "mo:base/HashMap";
 import List "mo:base/List";
 import Prelude "mo:base/Prelude";
 
-
-
-
-
  actor Crypton {
 
 
-///  2.. data store inside our opend canister that keeps track of which NFTs were minted and who the owners are.
+// ///  2.. data store inside our opend canister that keeps track of which NFTs were minted and who the owners are.
        //map of nfts 
        var mapOfNfts = HashMap.HashMap<Principal , NFTActorClass.NFT>( 1 , Principal.equal , Principal.hash);
        //map of owners
@@ -29,19 +25,17 @@ import Prelude "mo:base/Prelude";
               Debug.print(debug_show(Cycles.balance()));
               Cycles.add(100_500_000_000);
               let newNFT =  await NFTActorClass.NFT(name,owner,imgData);
-               Debug.print(debug_show(Cycles.balance()));
+              
               let newNFTPrincipal = await newNFT.getCanisterId();
-              //calling the nft
+        //       calling the nft
               mapOfNfts.put(newNFTPrincipal , newNFT);
               // calling the owneship add map function when a new minting happens
               addToOwnershipMap(owner , newNFTPrincipal);
 
-
-
               return newNFTPrincipal;
       };
 
-// 3 ... So now that we've got our map of owners, we again can't simply just use a put here.Instead, we actually have to go through a few steps to get hold of the existing list that's stored for a particular user and then update that list and then push it back into the HashMap.So I'm going to split out a separate function. Underneath this first mint function,I'm going to close it off with some semicolons, and I'm going to create a new private function, which is called addToOwnershipMap.//Purpose is to figure out how to add newly created NFT tp this map of owners
+// // 3 ... So now that we've got our map of owners, we again can't simply just use a put here.Instead, we actually have to go through a few steps to get hold of the existing list that's stored for a particular user and then update that list and then push it back into the HashMap.So I'm going to split out a separate function. Underneath this first mint function,I'm going to close it off with some semicolons, and I'm going to create a new private function, which is called addToOwnershipMap.//Purpose is to figure out how to add newly created NFT tp this map of owners
               
               private func addToOwnershipMap( owner : Principal , nftId : Principal) {
 
@@ -55,7 +49,7 @@ import Prelude "mo:base/Prelude";
 
               };
 
-/// 4 .... methood to fetch the list of IDs and turn it into an array that can be used on the frontend.
+// /// 4 .... methood to fetch the list of IDs and turn it into an array that can be used on the frontend.
 
             public query func getOwnedNFTs(user: Principal) : async [Principal]{
 
