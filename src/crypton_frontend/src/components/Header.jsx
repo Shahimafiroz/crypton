@@ -43,7 +43,7 @@ function Header() {
               <Link to="/collection">My NFTs</Link>
             </button>
             <button className="ButtonBase-root Button-root Button-text header-navButtons-3">
-              Latest
+              Wallet
             </button>
           </div>
         </header>
