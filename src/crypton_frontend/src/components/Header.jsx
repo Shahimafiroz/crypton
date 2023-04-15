@@ -9,11 +9,20 @@ import CURRENT_USER_ID from "../index";
 
 function Header() {
   const [userOwnedGallery, setOwnedGallery] = useState();
+  const [listingGallery, setListingGallery] = useState();
 
   async function getNFTs() {
     const userNFTSIds = await crypton_backend.getOwnedNFTs(CURRENT_USER_ID);
     console.log(userNFTSIds);
-    setOwnedGallery(<Gallery title="My NFT's" ids={userNFTSIds} />);
+    setOwnedGallery(
+      <Gallery title="My NFT's" ids={userNFTSIds} role="collection" />
+    );
+
+    const ListedNFTIds = await crypton_backend.getListedNFTS();
+    console.log(ListedNFTIds);
+    setListingGallery(
+      <Gallery title="Discover" ids={ListedNFTIds} role="discover" />
+    );
   }
 
   useEffect(() => {
@@ -21,7 +30,7 @@ function Header() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter forceRefresh={true}>
       <div className="app-root-1">
         <header className="Paper-root AppBar-root AppBar-positionStatic AppBar-colorPrimary Paper-elevation4">
           <div className="Toolbar-root Toolbar-regular header-appBar-13 Toolbar-gutters">
@@ -52,7 +61,7 @@ function Header() {
       <Switch>
         {/*  */}
         <Route exact path="/discover">
-          <h1>DISCOVER</h1>
+          {listingGallery}
         </Route>
         {/*  */}
         <Route exact path="/minter">

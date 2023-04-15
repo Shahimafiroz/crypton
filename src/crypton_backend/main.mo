@@ -8,6 +8,8 @@ import HashMap "mo:base/HashMap";
 import List "mo:base/List";
 import Prelude "mo:base/Prelude";
 import Bool "mo:base/Bool";
+import Iter "mo:base/Iter";
+
 
  actor Crypton {
   
@@ -68,6 +70,15 @@ import Bool "mo:base/Bool";
                 };
                 return List.toArray(userNfts);
             };
+
+////// 8 .... **************************************** function to get our listed Nfts *************************************
+ 
+           public query func getListedNFTS() : async [Principal]{
+
+               let ids = Iter.toArray(mapOfListings.keys());
+               return ids;
+           };
+
 ///// 5.... ************************************** function to list nfts for sale ****************************************
 
            public shared(msg) func  listItem( id:Principal , price : Nat): async Text {
@@ -98,15 +109,25 @@ import Bool "mo:base/Bool";
                   };
 ///////// 7 *************************** to check if the called item while loading is listed for sale ? ****************************
 
-                      public query func isListed (id:Principal): async Bool{
+            public query func isListed (id:Principal): async Bool{
 
                            if(mapOfListings.get(id) == null){
                                 return false;
                            }else{
                                 return true;
                            }
-                      };
+            };
+/////// 9 ********************************** function to get original owner The one who minted the NFT *****************************
 
+         public query func getOriginalOwner( id: Principal) : async Principal{
+
+            var listing : Listing = switch(mapOfListings.get(id)){
+                  case null return Principal.fromText("");
+                  case(?result) result;
+            };
+            return listing.itemOwner;
+           
+         };
 
 
 

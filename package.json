@@ -11,7 +11,7 @@
   "scripts": {
     "build": "webpack",
     "prebuild": "npm run generate",
-    "start": "webpack serve --mode development --env development",
+    "start": "webpack serve --mode development --env development --history-api-fallback",
     "prestart": "npm run generate",
     "generate": "dfx generate crypton_backend"
   },
@@ -50,6 +50,7 @@
     "@dfinity/authentication": "0.10.3",
     "@dfinity/identity": "0.10.3",
     "bootstrap": "^5.1.3",
+    "connect-history-api-fallback": "^2.0.0",
     "lib": "^5.0.1",
     "lit-html": "^1.4.1",
     "react": "^17.0.2",

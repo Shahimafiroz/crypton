@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const history = require("connect-history-api-fallback");
 
 function initCanisterEnv() {
   let localCanisters, prodCanisters;
@@ -134,5 +135,8 @@ module.exports = {
     hot: true,
     watchFiles: [path.resolve(__dirname, "src", frontendDirectory)],
     liveReload: true,
+    onBeforeSetupMiddleware(devServer) {
+      devServer.app.use(history());
+    },
   },
 };

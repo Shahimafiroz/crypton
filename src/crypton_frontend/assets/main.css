@@ -1218,14 +1218,15 @@ label[data-shrink="false"]
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 5px;
 }
 .disCardMedia-media {
   width: 100%;
 }
 .disCardMedia-img {
   object-fit: contain;
-  background-color: white;
-  padding: 20px;
+  background-color: rgb(255, 253, 253);
+  padding: 10px;
   image-rendering: pixelated;
 }
 
@@ -1255,13 +1256,13 @@ label[data-shrink="false"]
   width: 250px;
   background: none;
   margin-top: 40px;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .makeStyles-image-19 {
   width: 250px;
   height: 340px;
   object-fit: contain;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .makeStyles-image-19:after {

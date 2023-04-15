@@ -5,6 +5,7 @@ import { idlFactory } from "../../../../.dfx/local/canisters/nft";
 import { Principal } from "@dfinity/principal";
 import Button from "./Button";
 import { crypton_backend } from "../../../declarations/crypton_backend";
+import CURRENT_USER_ID from "../index";
 
 function Item(props) {
   const id = props.id; //1
@@ -45,23 +46,31 @@ function Item(props) {
     setName(name);
     setOwner(owner.toText());
     setImage(image);
-    const nftIsListed = await crypton_backend.isListed(props.id);
 
-    /////////////////////////////////// check if the nft is listed  ///////////////////////
-    if (nftIsListed) {
-      setOwner("Crypton");
-      setBlur({ filter: "blur(4px)" });
-      setSellStatus("Listed");
-    } else {
-      setButton(<Button handleClick={handleSell} text={"Sell"} />);
+    /////////////////////////////////// check if the nft is listed/ for mynfts and discover page   ///////////////////////
+    if (props.role == "collection") {
+      //nft/discover
+      const nftIsListed = await crypton_backend.isListed(props.id);
+      if (nftIsListed) {
+        setOwner("Crypton");
+        setBlur({ filter: "blur(4px)" });
+        setSellStatus("Listed");
+      } else {
+        setButton(<Button handleClick={handleSell} text={"Sell"} />);
+      } //nftISlisted
+    } else if (props.role == "discover") {
+      const originalOwner = await crypton_backend.getOriginalOwner(props.id);
+      if (originalOwner != CURRENT_USER_ID.toText()) {
+        setButton(<Button handleClick={handleBuy} text={"Buy"} />);
+      }
     }
-  }
+  } ///end of nft/discover
   // we only want to call the "loadNft" methood once and thats the 1st time this item component gets rendered hence we use useffect
   useEffect(() => {
     loadNft();
   }, []);
 
-  ////////////////////////////  Frontend changes When the onclick funtions is triggred (Button clicked) //////////////////////////////
+  ////************** FRONTEND changes When the onclick funtions is triggred (Button clicked)......... for SELLING   ///////////
   let price;
   function handleSell() {
     console.log("initiating Transfer of Token!");
@@ -76,7 +85,7 @@ function Item(props) {
     );
     setButton(<Button handleClick={sellItem} text={"Confirm"} />);
   }
-  ////////////////////////////  Backend changes When the onclick funtions is triggred (Button clicked)//////////////////////////////
+  /////*********  BACKEND ******* changes When the onclick funtions is triggred (Button clicked).............. for SELLING //////////
 
   async function sellItem() {
     setBlur({ filter: "blur(4px)" });
@@ -98,9 +107,16 @@ function Item(props) {
         setPriceInput();
         setOwner("Crypton");
         setSellStatus("Listed");
-      }
-    }
+      } //IF TRANSFER
+    } /// IF LISTING
+  } //SELL ITEM
+
+  ////************** FRONTEND changes When the onclick funtions is triggred (Button clicked)......... for BUYING   ///////////
+
+  async function handleBuy() {
+    console.log("Buyy was triggred");
   }
+
   /////////////////////////////////////////////            frontEnd              /////////////////////////////////
 
   return (
